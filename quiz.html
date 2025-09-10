@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz de Lógica de Programação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .opcao {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 200px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz de Lógica de Programação</h1>
+  <div id="quiz"></div>
+  <div id="resultado"></div>
+
+  <script>
+    const perguntas = [
+      {
+        pergunta: "Qual símbolo é usado para comparação de igualdade em JavaScript?",
+        opcoes: ["=", "==", "===", "!"],
+        resposta: "==="
+      },
+      {
+        pergunta: "Qual estrutura repete um bloco de código várias vezes?",
+        opcoes: ["if", "for", "switch", "break"],
+        resposta: "for"
+      },
+      {
+        pergunta: "Em JavaScript, qual palavra-chave declara uma variável?",
+        opcoes: ["var", "let", "const", "todas as anteriores"],
+        resposta: "todas as anteriores"
+      }
+    ];
+
+    let indice = 0;
+    let pontos = 0;
+
+    function carregarPergunta() {
+      if (indice < perguntas.length) {
+        let q = perguntas[indice];
+        let quizDiv = document.getElementById("quiz");
+        quizDiv.innerHTML = `<h2>${q.pergunta}</h2>`;
+        q.opcoes.forEach(op => {
+          quizDiv.innerHTML += `<button class='opcao' onclick="verificar('${op}')">${op}</button>`;
+        });
+      } else {
+        document.getElementById("quiz").innerHTML = "";
+        document.getElementById("resultado").textContent = `Fim do quiz! Você acertou ${pontos} de ${perguntas.length}.`;
+      }
+    }
+
+    function verificar(opcao) {
+      if (opcao === perguntas[indice].resposta) {
+        pontos++;
+        alert("✅ Resposta correta!");
+      } else {
+        alert("❌ Resposta errada!");
+      }
+      indice++;
+      carregarPergunta();
+    }
+
+    carregarPergunta();
+  </script>
+</body>
+</html>
